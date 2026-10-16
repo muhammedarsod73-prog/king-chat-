@@ -10,8 +10,8 @@ class _KingChatAppState extends State<KingChatApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: isDark ? ThemeData.dark() : ThemeData.light(),
-      home: isLocked ? LockScreen(onUnlock: () => setState(() => isLocked = false))
+      theme: isDark? ThemeData.dark() : ThemeData.light(),
+      home: isLocked? LockScreen(onUnlock: () => setState(() => isLocked = false))
                      : MainScreen(isDark: isDark, isBN: isBN, onToggleDark: ()=>setState(()=>isDark=!isDark), onToggleLang: ()=>setState(()=>isBN=!isBN), onLock: ()=>setState(()=>isLocked=true)),
     );
   }
@@ -28,8 +28,7 @@ class MsgModel {
 class StatusModel {
   String name, time; List<String> viewers;
   StatusModel({required this.name, required this.time, required this.viewers});
-}
-class MainScreen extends StatefulWidget {
+}class MainScreen extends StatefulWidget {
   final bool isDark, isBN; final VoidCallback onToggleDark, onToggleLang, onLock;
   MainScreen({required this.isDark, required this.isBN, required this.onToggleDark, required this.onToggleLang, required this.onLock});
   @override
@@ -94,7 +93,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         TextEditingController c=TextEditingController(); showDialog(context:context, builder:(_)=>AlertDialog(title:Text('Add Text Status'), content:TextField(controller:c, decoration:InputDecoration(hintText:'Type status...')), actions:[TextButton(onPressed:(){if(c.text.isNotEmpty) setState(()=>statuses.insert(0, StatusModel(name:'You', time:'Just now', viewers:[]))); Navigator.pop(context);}, child:Text('Post'))]));
       }),
       Divider(), Padding(padding:EdgeInsets.all(12), child:Text('Recent updates', style:TextStyle(color:Colors.grey, fontWeight:FontWeight.bold))),
-     ...statuses.map((s)=>ListTile(leading:Container(padding:EdgeInsets.all(2), decoration:BoxDecoration(shape:BoxShape.circle, border:Border.all(color:Color(0xFF25D366), width:2)), child:CircleAvatar(child:Text(s.name[0]))), title:Text(s.name), subtitle:Text(s.time), onTap:(){showDialog(context:context, builder:(_)=>AlertDialog(title:Text(s.name), content:Column(mainAxisSize:MainAxisSize.min, crossAxisAlignment:CrossAxisAlignment.start, children:[Text('Status at ${s.time}'), SizedBox(height:10), Text('Viewed by ${s.viewers.length}:', style:TextStyle(fontWeight:FontWeight.bold)),...s.viewers.map((v)=>Text('• $v'))]), actions:[TextButton(onPressed:()=>Navigator.pop(context), child:Text('Close'))]));})),
+    ...statuses.map((s)=>ListTile(leading:Container(padding:EdgeInsets.all(2), decoration:BoxDecoration(shape:BoxShape.circle, border:Border.all(color:Color(0xFF25D366), width:2)), child:CircleAvatar(child:Text(s.name[0]))), title:Text(s.name), subtitle:Text(s.time), onTap:(){showDialog(context:context, builder:(_)=>AlertDialog(title:Text(s.name), content:Column(mainAxisSize:MainAxisSize.min, crossAxisAlignment:CrossAxisAlignment.start, children:[Text('Status at ${s.time}'), SizedBox(height:10), Text('Viewed by ${s.viewers.length}:', style:TextStyle(fontWeight:FontWeight.bold)),...s.viewers.map((v)=>Text('• $v'))]), actions:[TextButton(onPressed:()=>Navigator.pop(context), child:Text('Close'))]));})),
     ]);
   }
   Widget _buildCallsTab(){
@@ -110,8 +109,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return ListView.builder(itemCount:groups.length, itemBuilder:(_,i){var g=groups[i]; return ListTile(leading:CircleAvatar(backgroundColor:Colors.orange, child:Icon(Icons.group, color:Colors.white)), title:Text(g.name), subtitle:Text(g.desc), trailing:g.isAdmin?Chip(label:Text('Admin', style:TextStyle(fontSize:10))):null, onTap:()=>showDialog(context:context, builder:(_)=>AlertDialog(title:Text(g.name), content:Column(mainAxisSize:MainAxisSize.min, crossAxisAlignment:CrossAxisAlignment.start, children:[Text('Description: ${g.desc}'), SizedBox(height:8), Text('Invite Link:', style:TextStyle(fontWeight:FontWeight.bold)), SelectableText(g.inviteLink, style:TextStyle(color:Colors.blue)), Text('Admin System: You')]), actions:[TextButton(onPressed:()=>Navigator.pop(context), child:Text('Share Link')), TextButton(onPressed:()=>Navigator.pop(context), child:Text('Close'))])));});
   }
   void _showSearch(){showDialog(context:context, builder:(_)=>AlertDialog(title:Text('Message Search'), content:TextField(onChanged:(v)=>setState(()=>searchQuery=v), decoration:InputDecoration(hintText:'Search chats...', prefixIcon:Icon(Icons.search)), autofocus:true), actions:[TextButton(onPressed:(){setState(()=>searchQuery=''); Navigator.pop(context);}, child:Text('Clear')), TextButton(onPressed:()=>Navigator.pop(context), child:Text('Search'))]));}
-}
-class ChatDetailScreen extends StatefulWidget {
+}class ChatDetailScreen extends StatefulWidget {
   final ChatModel chat; final bool isBN;
   ChatDetailScreen({required this.chat, required this.isBN});
   @override
