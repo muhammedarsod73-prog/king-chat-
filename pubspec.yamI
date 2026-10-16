@@ -1,29 +1,9 @@
-name: king_chat
-description: King Chat - Royal Chat App with Crown K Logo
-publish_to: 'none'
-version: 1.0.0+1
-
-environment:
-  sdk: '>=3.0.0 <4.0.0'
-
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  flutter_launcher_icons: ^0.13.1
-
-flutter:
-  uses-material-design: true
-  assets:
-    - assets/icon.png
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icon.png"
-  min_sdk_android: 21
-  web:
-    generate: true
-    image_path: "assets/icon.png"
-    background_color: "#4B0082"
-    theme_color: "#4B0082"
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.15.0
+  cloud_firestore: ^4.15.0
+  firebase_storage: ^11.6.0
+  agora_rtc_engine: ^6.3.0
+  permission_handler: ^11.1.0
