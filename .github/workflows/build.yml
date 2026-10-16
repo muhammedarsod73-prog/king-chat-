@@ -5,11 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check files
+      - name: List files
         run: |
-          pwd
           ls -la
-          ls -la assets || echo "assets missing"
+          cat pubspec.yaml
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -19,6 +18,7 @@ jobs:
           flutter-version: '3.22.0'
           channel: 'stable'
       - run: flutter doctor
+      - run: flutter create. --platforms=android
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
